@@ -45,6 +45,7 @@
                         <div class="col-md-8">
                             <div class="card-body">
                                 <h5 class="card-title">{{ $post->name }}</h5>
+                                <a href="{{route('post.edit',$post->id)}}">Editar</a>
                                 <h6 class="card-subtitle text-muted">
                                     {{ $post->category->name }} |
                                     {{ $post->comments_count }}

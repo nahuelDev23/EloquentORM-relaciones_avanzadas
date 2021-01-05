@@ -56,7 +56,7 @@ class LevelController extends Controller
             ->with('category', 'image', 'tags')
             ->withCount('comments')->get();
     
-        return view('level', [
+        return view('level.level', [
             'level'  => $level,
             'posts'  => $posts,
             'videos' => $videos

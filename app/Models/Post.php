@@ -9,6 +9,8 @@ class Post extends Model
 {
     use HasFactory;
 
+    public $fillable = ['name','category_id','url'];
+
     public function user()
     {
         return $this->belongsTo(User::class); # un post pertenece a un usuario
@@ -31,5 +33,15 @@ class Post extends Model
     public function tags()
     {
         return $this->morphToMany(Tag::class,'taggeable'); # muchos a muchos con morphToMany
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+        self::creating(function($table){
+            if(! app()->runningInConsole()){
+                $table->user_id = 1 ;
+            }
+        });
     }
 }

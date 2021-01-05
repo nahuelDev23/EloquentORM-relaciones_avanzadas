@@ -31,6 +31,12 @@
                         <a href="{{route('profile.show',$user->id)}}">{{$user->name}}</a>
                     @endforeach
                 </div>
+
+                <div class="links">
+                    @foreach($users as $user)
+                        <a href="{{route('post.create')}}">Crear Post</a>
+                    @endforeach
+                </div>
             </div>
                
             </div>
