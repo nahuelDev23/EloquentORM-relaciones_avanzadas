@@ -3,8 +3,8 @@
     {!! FORM::text('name',null,['class'=>'form-control']) !!}
 </div>
 <div class="form-group">
-    {!! FORM::label('name','Nombre del post') !!}
-    {!! FORM::select('category_id',[1=>'Informatica',2=>'Paranormal'],null,['placeholder'=>'Elegi una categoria']) !!}
+    {!! FORM::label('category_id','Categoria') !!}
+    {!! FORM::select('category_id',$categories,null,['placeholder'=>'Elegi una categoria']) !!}
 </div>
 <div class="form-group">
     {!! FORM::label('tags_name','tags separado por ,') !!}

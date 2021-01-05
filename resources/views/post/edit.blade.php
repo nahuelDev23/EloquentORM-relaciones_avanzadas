@@ -1,8 +1,6 @@
 @extends('layouts.layout')
 @section('content')
 <h1>Editar Post</h1>
-
-{{$tags}}
     {!! Form::model([
         'name'=>$post->name,
         'url'=>$post->image->url,

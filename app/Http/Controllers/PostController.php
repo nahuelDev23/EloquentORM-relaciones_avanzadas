@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Image;
@@ -18,7 +19,10 @@ class PostController extends Controller
    
     public function create()
     {
-        return view('post.create');
+        $categories = Category::pluck('name');
+        return view('post.create',[
+            'categories' => $categories
+        ]);
     }
 
    
