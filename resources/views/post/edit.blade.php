@@ -1,6 +1,5 @@
 @extends('layouts.layout')
 @section('content')
-{{$post}}
 <h1>Editar Post</h1>
     {!! Form::model([
         'name'=>$post->name,

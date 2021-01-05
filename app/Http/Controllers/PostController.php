@@ -38,9 +38,8 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-        $concat = $post;
         return view('post.edit',[
-            'post' => $concat,
+            'post' => $post,
         ]);
     }
 
