@@ -51,7 +51,10 @@ class PostController extends Controller
 
         /**
          * Tengo que hacer esto porque 
-         * $post->tags devuelve collective instance en implode(', ',tags)
+         * implode(', ',$post->tags); dice que esperea un array 
+         * y recibe Illuminate\Database\Eloquent\Collection (por la relacion)
+         * que tiene post con tags, entonces creo un array limpio y a ese nuevo
+         * array le puedo hacer el implode, que despues mando a la vista.
          */
         foreach($post->tags as $tag)
         {
@@ -59,7 +62,7 @@ class PostController extends Controller
           
         };
 
-        $tags = implode(', ',$tags);
+        $tags = implode(', ',$post->tags);
 
         return view('post.edit',[
             'post' => $post,
