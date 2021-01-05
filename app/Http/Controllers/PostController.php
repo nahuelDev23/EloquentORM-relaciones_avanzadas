@@ -62,7 +62,7 @@ class PostController extends Controller
           
         };
 
-        $tags = implode(', ',$post->tags);
+        $tags = implode(', ',$tags);
 
         return view('post.edit',[
             'post' => $post,
