@@ -9,6 +9,8 @@ class Tag extends Model
 {
     use HasFactory;
 
+    public $fillable = ['name'];
+
     public function posts()
     {
          # muchos a muchos desde la tabla madre muchos a muchos(transformados por muchos = morphedByMany)

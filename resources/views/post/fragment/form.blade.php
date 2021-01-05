@@ -7,6 +7,10 @@
     {!! FORM::select('category_id',[1=>'Informatica',2=>'Paranormal'],null,['placeholder'=>'Elegi una categoria']) !!}
 </div>
 <div class="form-group">
+    {!! FORM::label('tags_name','tags separado por ,') !!}
+    {!! FORM::text('tags_name',null,['class'=>'form-control']) !!}
+</div>
+<div class="form-group">
     {!! FORM::label('url','Url de imagen') !!}
     {!! FORM::text('url',null,['class'=>'form-control']) !!}
 </div>
