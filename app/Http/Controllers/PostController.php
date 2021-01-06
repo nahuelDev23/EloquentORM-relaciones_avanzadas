@@ -21,7 +21,8 @@ class PostController extends Controller
     {
         $categories = Category::pluck('name','id');
         return view('post.create',[
-            'categories' => $categories
+            'categories' => $categories,
+            
         ]);
     }
 
@@ -76,6 +77,13 @@ class PostController extends Controller
         return view('post.edit',[
             'post' => $post,
             'tags' => $tags,
+
+            /**
+             * Le mando categories a edit.blade.php
+             * entonces $categories en el form incluido no es null
+             * y a su vez le paso la referencia de 'category_id'
+             * desde Form:model() $post->category->toArray();
+             */
             'categories' => $categories,
             
         ]);
@@ -84,7 +92,11 @@ class PostController extends Controller
     
     public function update(Request $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $post->name = $request->name;
+        $post->category_id = empty($request->category_id) ? $post->category_id : $request->category_id;
+        $post->update($request->except(['url','tags_name']));
+
     }
 
   

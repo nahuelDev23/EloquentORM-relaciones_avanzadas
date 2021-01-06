@@ -5,7 +5,7 @@
         'name'=>$post->name,
         'url'=>$post->image->url,
         'tags_name'=> $tags ,
-        'category_id'=>$categories,
+        'category_id'=>$post->category->toArray(),
         ],['route'=>['post.update',$post->id],'method'=>'PUT']) !!}
         @include('post.fragment.form')
     {!! FORM::close() !!}
