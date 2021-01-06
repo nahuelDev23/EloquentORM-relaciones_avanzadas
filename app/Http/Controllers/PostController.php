@@ -19,7 +19,7 @@ class PostController extends Controller
    
     public function create()
     {
-        $categories = Category::pluck('name');
+        $categories = Category::pluck('name','id');
         return view('post.create',[
             'categories' => $categories
         ]);
@@ -60,17 +60,24 @@ class PostController extends Controller
          * que tiene post con tags, entonces creo un array limpio y a ese nuevo
          * array le puedo hacer el implode, que despues mando a la vista.
          */
-        foreach($post->tags as $tag)
+        if(!empty($post->tags))
         {
-            $tags[] = $tag->name;
-          
-        };
-
-        $tags = implode(', ',$tags);
-
+            foreach($post->tags as $tag)
+            {
+                $tags[] = $tag->name;
+              
+            };
+    
+            $tags = implode(', ',$tags);
+        }else {
+            $tags[]='';
+        }
+        $categories = $post->category::pluck('name','id');
         return view('post.edit',[
             'post' => $post,
-            'tags' => $tags
+            'tags' => $tags,
+            'categories' => $categories,
+            
         ]);
     }
 
