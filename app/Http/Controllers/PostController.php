@@ -31,7 +31,7 @@ class PostController extends Controller
     {
         $tags_name = explode(',',$request->tags_name); # creo un array por cada elemento que esta separado por una ","
        
-        $post = Post::create($request->except(['url'])); # agrego todos los datos, menos la url, ya que la tabla post no tiene una columna con el capo 'url' y daria error
+        $post = Post::create($request->all()); # agrego todos los datos, menos la url, ya que la tabla post no tiene una columna con el capo 'url' y daria error
 
         foreach($tags_name as $tag_name)
         {
@@ -95,8 +95,18 @@ class PostController extends Controller
         $post = Post::find($id);
         $post->name = $request->name;
         $post->category_id = empty($request->category_id) ? $post->category_id : $request->category_id;
-        $post->update($request->except(['url','tags_name']));
+        $post->update($request->all());
 
+        $tags_name = explode(',',$request->tags_name); # creo un array por cada elemento que esta separado por una ","
+       
+        foreach($tags_name as $tn)
+        {
+            $tagIds[] = Tag::updateOrCreate(['name'=> $tn])->id;
+        }
+        
+        $post->tags()->detach();
+        $post->tags()->attach($tagIds);
+        
     }
 
   
