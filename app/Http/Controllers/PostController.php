@@ -53,7 +53,7 @@ class PostController extends Controller
     public function edit($id)
     {
         $post = Post::find($id);
-
+        $tags = [];
         /**
          * Tengo que hacer esto porque 
          * implode(', ',$post->tags); dice que esperea un array 
@@ -65,13 +65,16 @@ class PostController extends Controller
         {
             foreach($post->tags as $tag)
             {
-                $tags[] = $tag->name;
-              
+                if($tag->name !== ''){
+                    $tags[] = $tag->name;
+                }else{
+                    $post->tags()->detach();
+                }
+               
             };
-    
             $tags = implode(', ',$tags);
         }else {
-            $tags[]='';
+            $post->tags()->detach();
         }
         $categories = $post->category::pluck('name','id');
         return view('post.edit',[
@@ -94,19 +97,22 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->name = $request->name;
-        $post->category_id = $request->category_id;
+        $post->category_id =  $request->category_id;
         $post->update($request->all());
 
         $tags_name = explode(',',$request->tags_name); # creo un array por cada elemento que esta separado por una ","
        
         foreach($tags_name as $tn)
         {
-            $tagIds[] = Tag::updateOrCreate(['name'=> $tn])->id;
+            $tagIds[] = Tag::create(['name'=> $tn])->id;
         }
         
         $post->tags()->detach();
         $post->tags()->attach($tagIds);
         
+        $post->image()->update(['url'=>$request->url]);
+
+        return back()->with('success','Post Agregado con exito');
     }
 
   

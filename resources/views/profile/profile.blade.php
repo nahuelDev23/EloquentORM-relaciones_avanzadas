@@ -53,9 +53,9 @@
                                 </h6>
                                 <p class="card-text small">
                                     @foreach($post->tags as $tag)
-                                    <span class="badge badge-light">
-                                        #{{ $tag->name }}
-                                    </span>
+                                        <span class="badge badge-light">
+                                            #{{ $tag->name }}
+                                        </span>
                                     @endforeach
                                 </p>
                             </div>
