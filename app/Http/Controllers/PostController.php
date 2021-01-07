@@ -94,7 +94,7 @@ class PostController extends Controller
     {
         $post = Post::find($id);
         $post->name = $request->name;
-        $post->category_id = empty($request->category_id) ? $post->category_id : $request->category_id;
+        $post->category_id = $request->category_id;
         $post->update($request->all());
 
         $tags_name = explode(',',$request->tags_name); # creo un array por cada elemento que esta separado por una ","
